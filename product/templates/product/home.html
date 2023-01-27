@@ -1,0 +1,63 @@
+{% extends 'product/base.html' %} {% load static %} {% load split_key %} {% block navline%}
+<div class="menu-bar">
+  <ul>
+    {% for key,value in productCat_dict.items %}
+    <li>
+      <a href="#">{{ key }} <i class="fas fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <ul>
+          {% for key_l,value_l in value.items %}
+          <li>
+            <a href="{% url 'product_line_view' key_l %}">{{ key_l }}<i class="fas fa-caret-right"></i></a>
+
+            <div class="dropdown-menu-1">
+              <ul>
+                {% for prod_item in value_l %}
+                <li><a href="{% url 'Product_details' prod_item.id %}">{{ prod_item.product_name}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock navline %} {% block main %}
+<div class="row d-flex justify-content-center">
+  {% for prod in product_list %}
+  <div class="col-3 mt-3 me-0">
+    <div class="card" style="width: 300px; height: 400px">
+      <a href="{% url 'Product_details' prod.id %}">
+        <img
+          src="{{ prod.product_image.url }}"
+          class="card-img-top mt-2 mb-2"
+          alt="{{ prod.product_name }}"
+          style="max-width: 100%; max-height: 200px"
+        />
+      </a>
+      <hr class="mb-0" />
+      <div class="card-body">
+        <h5 class="card-title">{{ prod.product_name }}</h5>
+        <p class="card-text">&#8377;{{ prod.product_price }}</p>
+        <div class="d-flex justify-content-evenly">
+          <a
+            href="{% url 'create_cart' prod.id %}"
+            class="btn cart-btn"
+            ><span>Add To Cart </span><img src="{% static '/images/cart.png' %}" alt="cart Icon" style="height:1.5rem"></a
+          >
+          <a
+            href="{% url 'create_cart_order' prod.id 'order' %}"
+            class="btn order-btn"
+            ><span>Order</span> <img src="{% static '/images/order.png' %}" alt="cart Icon" style="height: 1.5rem;"></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock main%}

@@ -1,0 +1,74 @@
+{% extends 'product/base.html' %} {% load static %} 
+{% block navline %}
+<div class="menu-bar">
+  <ul>
+    {% for key,value in productCat_dict.items %}
+    <li>
+      <a href="#">{{ key }} <i class="fas fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <ul>
+          {% for key_l,value_l in value.items %}
+          <li>
+            <a href="{% url 'product_line_view' key_l %}">{{ key_l }}<i class="fas fa-caret-right"></i></a>
+
+            <div class="dropdown-menu-1">
+              <ul>
+                {% for prod_item in value_l %}
+                <li><a href="{% url 'Product_details' prod_item.id %}">{{ prod_item.product_name}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock navline%}
+{% block main%}
+
+
+<div class="row d-flex justify-content-evenly">
+  <div class="col-4 mt-2">
+    <div class="card" style=" height: 550px">
+      <img
+        src="{{ prod_detail.product_image.url }}"
+        class="card-img-top  "
+        alt="{{prod_detail.product_name}}"
+        
+      />
+      <hr class="mb-0 mt-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-evenly">
+        <a href="{% url 'create_cart' prod_detail.id %}" class="btn cart-btn"><span>Add To Cart </span><img src="{% static '/images/cart.png' %}" alt="cart Icon" style="height:1.5rem"></a>
+
+        <a href="{% url 'create_cart_order' prod_detail.id 'order' %}" class="btn order-btn"><span>Order Now </span><img src="{% static '/images/order.png' %}" alt="cart Icon" style="height:1.5rem"></a>
+    </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 mt-2">
+    <div class="card" >
+      
+      <div class="card-body">
+        <h5 class="card-title">{{prod_detail.product_name}}</h5>
+        <hr>
+        <p>{{prod_detail.product_desc}}</p>
+        <hr>
+        <p><b>Quantity </b>{{prod_detail.product_quantity}}</p>
+        <hr>
+        <p><b>Price </b>&#8377;{{prod_detail.product_price}}</p>
+        <hr>
+        <!-- <p><b>Delivery Check </b>{{prod_detail.prod_del_check}}</p>
+        <hr> -->
+        <p><b>Delivery Charge </b>&#8377;{{prod_detail.prod_delivery_charge}}</p>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

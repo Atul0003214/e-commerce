@@ -1,0 +1,87 @@
+{% extends 'cart/base.html' %} {% block main %} {% load static %}
+
+{% if cart_rec %}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-7">
+      <div class="row mt-2">
+        <div class="card">
+          {% for cart in cart_rec %}
+          <div class="d-flex flex-row mb-3">
+            <div class="p-2 d-flex align-items-center">
+              <div class="card-body" >
+                <img style="height: 200px" src="{{ cart.product.product_image.url }}" alt="placeholder" />
+              </div>
+            </div>
+            <div class="p-2">
+              <div class="card-body">
+                <div class="p-2">
+                  <div><p class="card-text mb-1">{{cart.cart_product_name}}</p></div>
+                <div><p class="card-text mb-1">{{cart.cart_product_desc}}</p></div>
+                  <div class="dflex mb-1">
+                    <p class="card-text">
+                      <img
+                        src="{% static '/cart/images/down.jpg' %}"
+                        style="height: 1rem"
+                        alt="down.jpg"
+                        class="arrow_icon mx-2"
+                        data-prod_id="{{cart.id}}"
+                        data-action="reduce"
+                      />
+                      {{cart.cart_prod_quantity}}
+                      <img
+                        src="{% static '/cart/images/up.jpg' %}"
+                        style="height: 1rem"
+                        alt="up.jpg"
+                        class="arrow_icon mx-2"
+                        data-prod_id="{{cart.id}}"
+                        data-action="increase"
+                      />
+                    </p>
+                  </div>
+                <div><p class="card-text mb-1"><b>&#8377;{{cart.cart_product_price}}</b></div>
+                  <!-- <p class="card-text">total {{ cart.total_price }}</p><hr class="m-0"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3 mt-2">
+      <div class="card" style="width: 18rem">
+        <div class="text-center py-2">
+          <h7>CART DETAILS</h7>
+          <hr class="m-0"/>
+        </div>
+        <div class="card-body text-center">
+          <div>Price : &#8377;{{ total }}</div>
+          <div>Discount : {{ discount }}</div>
+          <div>Delivery Charges: &#8377;{{ del_charge }}</div>
+          <hr />
+          <b>Total Amount: &#8377;{{ net_total }}</b>
+          <hr />
+          <a href="{% url 'cart_items' %}" class="btn btn-outline-secondary ">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="no-items-container">
+  
+  <div>
+    <h1>Cart is empty </h1>
+    <div class="d-flex  justify-content-center">
+  <a class="btn no-item-content " href="{% url 'index-page' %}">Shop Now</a>
+  </div>
+</div>
+  
+ 
+</div>
+
+{% endif %}
+{% endblock main %}

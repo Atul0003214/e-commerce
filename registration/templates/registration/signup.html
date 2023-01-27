@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %} {% block main %}
+
+<div class="wrapper">
+  <div class="title">Sign Up</div>
+  <form action="" method="POST">
+    {% csrf_token %} {% for formfield in signupForm %}
+    <div class="field mt-5">
+      {{ formfield }} {{ formfield.label_tag }}
+        {{ formfield.errors|striptags }}
+    </div>
+    {% endfor %}
+    {% for c_formfield in customForm %}
+    <div class="field mt-5">
+      {{ c_formfield }} {{ c_formfield.label_tag }}
+        {{ c_formfield.errors|striptags }}
+    </div>
+    {% endfor %}<br><br>
+    <div class="field mt-5">
+      <input type="submit" value="Signup" />
+    </div>
+    <div class="signup-link">
+      Have an account ? <a href="{% url 'login' %}">LogIn</a>
+    </div>
+    
+  </form>
+</div>
+{% endblock main%}
