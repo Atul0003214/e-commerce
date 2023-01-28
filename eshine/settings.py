@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-xl&d8-qn!7rp1ey)x9jj55lz66y2r78qop@p%4gel5v06p-t*k
 DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
-ROOT_URLCONF = 'vercel_app.urls'
+ROOT_URLCONF = 'eshine.urls'
 
-WSGI_APPLICATION = 'vercel_app.wsgi.application'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,11 +57,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'eshine.urls'
+TEMPLATE_DIR = BASE_DIR / 'static/'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
