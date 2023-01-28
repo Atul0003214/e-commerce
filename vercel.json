@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": ".eshine/wsgi.py",
+      "src": "eshine/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": ".eshine/wsgi.py"
+      "dest": "eshine/wsgi.py"
     }
   ]
 }
