@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-xl&d8-qn!7rp1ey)x9jj55lz66y2r78qop@p%4gel5v06p-t*k
 DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
+# ALLOWED_HOSTS = []
 ROOT_URLCONF = 'eshine.urls'
 
 
