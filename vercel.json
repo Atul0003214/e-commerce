@@ -22,7 +22,6 @@
     {
       "src": "/(.*)",
       "dest": "eshine/wsgi.py"
-      "dest": "eshine/wsgi.py"
     }
   ]
 }
